@@ -19,7 +19,7 @@ then
 fi
 
 #!
-docker create -p 8443:8443 --name node_app "$IMAGE_NAME"
+docker create -p 8080:8080 --name node_app "$IMAGE_NAME"
 #!
 echo "$PRIVATE_KEY" > privatekey.pem
 #!
