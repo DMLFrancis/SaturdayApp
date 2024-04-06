@@ -1,32 +1,133 @@
-#!
-#!
+#!/bin/bash
+
+# Define the Docker image name
+IMAGE_NAME="deanfrancis/hubsaturdayapp"
+
+# Define the content for private key
+PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+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
+cdBGe/2Ow4b4O8fZs664mZGE8/x+98/5
+-----END PRIVATE KEY-----
+"
+
+# Define the content for server certificate
+SERVER="-----BEGIN CERTIFICATE-----
+MIIF9TCCA92gAwIBAgIUa7eBk8OvUSqHvPVfSK6LQStVyAIwDQYJKoZIhvcNAQEL
+BQAwgYgxCzAJBgNVBAYTAklFMREwDwYDVQQIDAhMZWluc3RlcjEPMA0GA1UEBwwG
+RHVibGluMSQwIgYDVQQKDBtOYXRpb25hbCBDb2xsZWdlIG9mIElyZWxhbmQxHDAa
+BgNVBAsME1NjaG9vbCBvZiBDb21wdXRpbmcxETAPBgNVBAMMCG5jaXJsLmllMCAX
+DTI0MDQwNjExMDc1MFoYDzIwNTEwODIzMTEwNzUwWjCBiDELMAkGA1UEBhMCSUUx
+ETAPBgNVBAgMCExlaW5zdGVyMQ8wDQYDVQQHDAZEdWJsaW4xJDAiBgNVBAoMG05h
+dGlvbmFsIENvbGxlZ2Ugb2YgSXJlbGFuZDEcMBoGA1UECwwTU2Nob29sIG9mIENv
+bXB1dGluZzERMA8GA1UEAwwIbmNpcmwuaWUwggIiMA0GCSqGSIb3DQEBAQUAA4IC
+DwAwggIKAoICAQDBehXuAc6Skq4+dvtx90EvoAca5bUGvsY7GrLjr9X90Y3tBnm9
+JFebHDh4jXrXeePlY/3QkhxekYewiueVliRse5iCmn5xi058bTwqaR+jh+RXykRs
+UZndRnW0A8iOk03xNLs2fjxGMfAIcdW8kOy5wosH39oXBjKzglfCfo2Ht25+nuwr
++qw+PkZKz+1rg1paw7Xl3OFrSyGwXqV29ZZfLC240SN1q2VR9vzGL8ofqce5PqX/
++jyus+XSCYgVv9g39+kFtsK41CRpngdVog35ms1L9k8Pd0jcsS+P/FcmoHxZfGBm
+8HvZlOHhqDZ3AsFYpmtKRg4o9egMBJkYMwopBzN1QbQEOtMNtA19NXiigCbfo7Qg
+MAYKtrU3lArs5slfjRp/5TgoiSZSJjou/Lhil7KbBXyTJt+u4SdQbOTHLQxn79iV
+UFY8pZYDd0711vRSXlSBPKAL1hagJGU56gIvp7nOwsvBAVQB58KxqTwjBxt80lZ5
+Jle4V3xerY5pp549+8dYYvCQKBQuakF8mceGftzhkUWV2WOG2w2Au0iC+Phgga+D
+Pw21jQVfLI2lPLXUDby0FBUGh0YUafREE4wi/wHsftN5WR3Ju9yzBf3xSF63RA5w
+OiUmRlKOkzIF3KpE4t3nSxyWWZyPEVMm8eRvLYYrv1GrDUl/gRWk8wTfiQIDAQAB
+o1MwUTAdBgNVHQ4EFgQUXJzYltsDSUsPk9iemhL66rFOUWgwHwYDVR0jBBgwFoAU
+XJzYltsDSUsPk9iemhL66rFOUWgwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0B
+AQsFAAOCAgEAuGS68+DOcHFBHOYAttMz4+KDzYYmSz/x4jHW5z/rx33jhsFszPDP
+2hqYrAX2tJBR3Aay1rGKy8Feohx2it0twHq1dPqZFTyme8XV7Yr5A6+bbGlpVGT2
+abUUdpnfiYkbAraNHjkVpOnLgoXM7FcUQDm9QtkugQFyulWJfRoIAmfKVumJKCUb
+Lw56pJoQJpwSev3NJnXp34dcwXtZ3ZOLYJMUFyF+tlaV+TS/+KTfJ3kqqbsG+bTj
+l8UkdgtemIQcgMOqwPHevMaHMKvG2kBwMaIP/rjQ/lkRD7951uWn/joyWFwY6DTX
+yWeYR6Xpo6iT7DbhqNQa2FRKZGlFxPRMtWdFhilRy8TKqwZYdRqH7dM9xwWqElIh
+XYxQ+HTHSof8mmyQrkDVTc1Pz7xHRBDNxYfHjlf9HyovAL4IkTg7ZtOVOz2G6LTk
+py/YmdqX+9Uhg18upMoPRxUufuoscfT/ZdZLu/h0sixKvWmiNfKZryMvU5Nw+e7G
+tRBeMcmljEJ8Mq3/qe4+AW14D+IcMe8ErH1eECTrjm6NEAnjdLrod4D3tVztFwMj
+W8kcsyJf2ldekAEQgiA5fXvpkJXhZ+YXH4DKFpHS2MdAtGNn19weBN36fsKyKoF1
+iqMh5NIHNGfmSjzFZ7xZArM2QAXYvmidruiwBXz6AnG/6OTCWYrfSdQ=
+-----END CERTIFICATE-----
+"
+
+# Get the ID of the current instance based on the image name
 CURRENT_INSTANCE=$(docker ps -a -q --filter ancestor="$IMAGE_NAME" --format="{{.ID}}")
 
-#!
-if [ "$CURRENT_INSTANCE" ]
-then
+# If there's a current instance, stop and remove it
+if [ "$CURRENT_INSTANCE" ]; then
     docker rm $(docker stop "$CURRENT_INSTANCE")
 fi
 
-#!
+# Pull the latest version of the specified Docker image
 docker pull "$IMAGE_NAME"
 
-#!
+# Check if a container named "node_app" exists
 CONTAINER_EXISTS=$(docker ps -a | grep node_app)
-if [ "$CONTAINER_EXISTS" ]
-then
+
+# If "node_app" container exists, remove it
+if [ "$CONTAINER_EXISTS" ]; then
     docker rm "node_app"
 fi
 
-#!
+# Create a new Docker container named "node_app" and expose port 8443
 docker create -p 8443:8443 --name node_app "$IMAGE_NAME"
-#!
+
+# Create privatekey.pem file and write the content
 echo "$PRIVATE_KEY" > privatekey.pem
-#!
+
+# Create server.crt file and write the content
 echo "$SERVER" > server.crt
-#!
+
+# Copy privatekey.pem file into the "node_app" container
 docker cp ./privatekey.pem "node_app:/privatekey.pem"
-#!
+
+# Copy server.crt file into the "node_app" container
 docker cp ./server.crt "node_app:/server.crt"
-#!
+
+# Start the "node_app" container
 docker start "node_app"
